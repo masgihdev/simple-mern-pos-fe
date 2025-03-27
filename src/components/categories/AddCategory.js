@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../../config/api';
 
 const AddCategory = () => {
   const [formData, setFormData] = useState({
@@ -20,9 +21,8 @@ const AddCategory = () => {
     setError('');
     
     try {
-      console.log('Submitting category:', formData); // Debug log
-      const response = await axios.post('http://localhost:5000/api/categories', formData);
-      console.log('Category created:', response.data); // Debug log
+      const response = await axios.post(`${API_BASE_URL}/categories`, formData);
+      console.log('Category created:', response.data);
       navigate('/categories');
     } catch (error) {
       console.error('Error creating category:', error.response?.data || error);
